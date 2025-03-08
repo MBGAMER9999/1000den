@@ -1,96 +1,340 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>1000den Score Keeper</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #121212;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1, h2 {
+      color: #0d98ba;
+      text-align: center;
+    }
+    .card {
+      background: #1e1e1e;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    input[type="text"],
+    input[type="number"] {
+      padding: 10px;
+      margin: 5px 0;
+      width: calc(100% - 22px);
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    input[type="text"]::placeholder,
+    input[type="number"]::placeholder {
+      color: #aaa;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px 0;
+      background-color: #0d98ba;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0b7d99;
+    }
+    button.btn-reset {
+      background-color: #e74c3c;
+    }
+    button.btn-reset:hover {
+      background-color: #c0392b;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #0d98ba;
+    }
+    th {
+      background-color: #0d98ba;
+      color: #fff;
+    }
+    tr.winner {
+      background-color: #2ecc71;
+      color: #fff;
+    }
+    #winnerAnnouncement {
+      text-align: center;
+      font-size: 1.5em;
+      margin-top: 10px;
+      color: #2ecc71;
+    }
+    .round-history {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>1000den Score Keeper</h1>
+    
+    <!-- Speler toevoegen -->
+    <div class="card" id="playerSection">
+      <h2>Speler Toevoegen</h2>
+      <input type="text" id="playerName" placeholder="Naam van speler">
+      <button onclick="addPlayer()">Voeg Speler Toe</button>
+    </div>
+    
+    <!-- Score invoeren -->
+    <div class="card" id="scoreSection">
+      <h2>Score Invoeren (Ronde <span id="currentRound">1</span>)</h2>
+      <div id="scoreInputs"></div>
+      <button onclick="addRound()">Ronde Toevoegen</button>
+    </div>
+    
+    <!-- Huidige scoreboard -->
+    <div class="card">
+      <h2>Spelers en Totaalscores</h2>
+      <table id="scoreTable">
+        <thead>
+          <tr>
+            <th>Speler</th>
+            <th>Totaal</th>
+          </tr>
+        </thead>
+        <tbody id="scoreTableBody">
+          <!-- Dynamisch ingevuld -->
+        </tbody>
+      </table>
+      <div id="winnerAnnouncement"></div>
+      <button class="btn-reset" onclick="resetGame()">Reset Spel</button>
+    </div>
+    
+    <!-- Ronde geschiedenis -->
+    <div class="card">
+      <h2>Ronde Geschiedenis</h2>
+      <div class="round-history">
+        <table id="historyTable">
+          <thead>
+            <tr>
+              <th>Ronde</th>
+              <!-- Speler namen worden hier dynamisch toegevoegd -->
+            </tr>
+          </thead>
+          <tbody id="historyTableBody">
+            <!-- Ronde scores komen hier -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Globale variabelen
+    let players = [];
+    let rounds = [];
+    let roundCount = 1;
+    let gameOver = false;
+
+    // Sla huidige speldata op in localStorage
+    function saveData() {
+      const data = { players, rounds, roundCount, gameOver };
+      localStorage.setItem("scoreKeeperData", JSON.stringify(data));
+    }
+
+    // Laad opgeslagen speldata uit localStorage
+    function loadData() {
+      const dataString = localStorage.getItem("scoreKeeperData");
+      if (dataString) {
+        const data = JSON.parse(dataString);
+        players = data.players || [];
+        rounds = data.rounds || [];
+        roundCount = data.roundCount || 1;
+        gameOver = data.gameOver || false;
+        document.getElementById("currentRound").textContent = roundCount;
+      }
+    }
+
+    // Voeg speler toe en update de UI
+    function addPlayer() {
+      if (gameOver) return;
+      const nameInput = document.getElementById("playerName");
+      const name = nameInput.value.trim();
+      if (name === "") {
+        alert("Vul een geldige naam in.");
+        return;
+      }
+      players.push({ name: name, score: 0 });
+      nameInput.value = "";
+      updateScoreTable();
+      updateScoreInputs();
+      updateHistoryHeader();
+      saveData();
+    }
+
+    // Werk de scoretabel bij en highlight winnende spelers
+    function updateScoreTable() {
+      const tableBody = document.getElementById("scoreTableBody");
+      tableBody.innerHTML = "";
+      players.forEach(player => {
+        const row = document.createElement("tr");
+        if (player.score >= 1000) {
+          row.classList.add("winner");
+        }
+        const nameCell = document.createElement("td");
+        nameCell.textContent = player.name;
+        const scoreCell = document.createElement("td");
+        scoreCell.textContent = player.score;
+        row.appendChild(nameCell);
+        row.appendChild(scoreCell);
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Maak invoervelden voor de scores per speler voor de huidige ronde
+    function updateScoreInputs() {
+      const scoreInputsDiv = document.getElementById("scoreInputs");
+      scoreInputsDiv.innerHTML = "";
+      players.forEach((player, index) => {
+        const div = document.createElement("div");
+        div.style.marginBottom = "10px";
+        div.innerHTML = `<label style="display:block; margin-bottom:5px;">${player.name}:</label>
+                         <input type="number" id="score_${index}" placeholder="Score voor deze ronde">`;
+        scoreInputsDiv.appendChild(div);
+      });
+    }
+
+    // Voeg een ronde toe: update scores, sla ronde op in de geschiedenis en controleer op winnaar
+    function addRound() {
+      if (gameOver) return;
+      if (players.length === 0) {
+        alert("Voeg eerst spelers toe.");
+        return;
+      }
+      let roundScores = [];
+      players.forEach((player, index) => {
+        const scoreInput = document.getElementById("score_" + index);
+        const roundScore = parseInt(scoreInput.value) || 0;
+        player.score += roundScore;
+        roundScores.push(roundScore);
+      });
+      rounds.push({ round: roundCount, scores: roundScores });
+      roundCount++;
+      document.getElementById("currentRound").textContent = roundCount;
+      updateScoreTable();
+      updateRoundHistory();
+      clearRoundInputs();
+      checkWinner();
+      saveData();
+    }
+
+    // Maak de invoervelden leeg voor de volgende ronde
+    function clearRoundInputs() {
+      players.forEach((player, index) => {
+        const scoreInput = document.getElementById("score_" + index);
+        if (scoreInput) {
+          scoreInput.value = "";
+        }
+      });
+    }
+
+    // Controleer of een speler 1000 of meer punten heeft behaald en geef dit weer
+    function checkWinner() {
+      const winnerAnnouncement = document.getElementById("winnerAnnouncement");
+      winnerAnnouncement.innerHTML = "";
+      players.forEach(player => {
+        if (player.score >= 1000) {
+          winnerAnnouncement.innerHTML += `<p>${player.name} heeft gewonnen!</p>`;
+          gameOver = true;
+        }
+      });
+      if (gameOver) {
+        document.querySelector("#scoreSection button").disabled = true;
+      }
+    }
+
+    // Reset het hele spel: spelers, rondes en de UI
+    function resetGame() {
+      if (confirm("Weet je zeker dat je het spel wilt resetten?")) {
+        players = [];
+        rounds = [];
+        roundCount = 1;
+        gameOver = false;
+        document.getElementById("playerName").value = "";
+        document.getElementById("currentRound").textContent = roundCount;
+        document.getElementById("winnerAnnouncement").innerHTML = "";
+        document.querySelector("#scoreSection button").disabled = false;
+        updateScoreTable();
+        updateScoreInputs();
+        updateRoundHistory(true);
+        updateHistoryHeader(true);
+        localStorage.removeItem("scoreKeeperData");
+      }
+    }
+
+    // Update de header van de rondegeschiedenis met de huidige spelersnamen
+    function updateHistoryHeader(reset = false) {
+      const historyTableHead = document.querySelector("#historyTable thead tr");
+      historyTableHead.innerHTML = "<th>Ronde</th>";
+      players.forEach(player => {
+        const th = document.createElement("th");
+        th.textContent = player.name;
+        historyTableHead.appendChild(th);
+      });
+    }
+
+    // Werk de rondegeschiedenis bij: toon per ronde de ingevoerde scores
+    function updateRoundHistory(reset = false) {
+      const historyTableBody = document.getElementById("historyTableBody");
+      if (reset) {
+        historyTableBody.innerHTML = "";
+        return;
+      }
+      historyTableBody.innerHTML = "";
+      rounds.forEach(round => {
+        const row = document.createElement("tr");
+        const roundCell = document.createElement("td");
+        roundCell.textContent = round.round;
+        row.appendChild(roundCell);
+        round.scores.forEach(score => {
+          const cell = document.createElement("td");
+          cell.textContent = score;
+          row.appendChild(cell);
+        });
+        historyTableBody.appendChild(row);
+      });
+    }
+
+    // Laad opgeslagen data bij het opstarten
+    window.onload = function() {
+      loadData();
+      updateScoreTable();
+      updateScoreInputs();
+      updateRoundHistory();
+      updateHistoryHeader();
+      document.getElementById("currentRound").textContent = roundCount;
+      // Als het spel al afgelopen was, de score invoer uitschakelen.
+      if (gameOver) {
+        document.querySelector("#scoreSection button").disabled = true;
+      }
+    }
+  </script>
+</body>
 </html>
